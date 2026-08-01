@@ -22,8 +22,10 @@ namespace DEMO
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 
             builder.Services.AddFluentValidationAutoValidation();
+            ValidatorOptions.Global.DefaultRuleLevelCascadeMode = CascadeMode.Stop;
 
             builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
+            builder.Services.AddValidatorsFromAssemblyContaining<UpdateUserValidators>();
 
             var app = builder.Build();
 
