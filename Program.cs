@@ -1,4 +1,7 @@
 using DEMO.Data;
+using DEMO.Validators.UserValidators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Scalar;
 using Scalar.AspNetCore;
@@ -17,6 +20,10 @@ namespace DEMO
             builder.Services.AddOpenApi();
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+
+            builder.Services.AddFluentValidationAutoValidation();
+
+            builder.Services.AddValidatorsFromAssemblyContaining<CreateUserValidator>();
 
             var app = builder.Build();
 
